@@ -14,8 +14,6 @@ public class JobCategories {
     @Column(name = "jobcategory_name")
     private String name;
 
-    @OneToMany(mappedBy = "jobCategory", cascade = CascadeType.REMOVE)
-    private List<Employee> employees;
 
     public int getId() {
         return id;
@@ -33,20 +31,11 @@ public class JobCategories {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
     @Override
     public String toString() {
         return "JobCategory{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", employees=" + employees +
                 '}';
     }
 

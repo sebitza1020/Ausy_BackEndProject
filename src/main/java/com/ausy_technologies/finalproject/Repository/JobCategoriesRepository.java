@@ -13,6 +13,5 @@ public interface JobCategoriesRepository extends JpaRepository<JobCategories, In
     @Override
     List<JobCategories> findAll();
 
-    @Override
-    Optional<JobCategories> findById(Integer integer);
+    JobCategories findById(int id);
 }

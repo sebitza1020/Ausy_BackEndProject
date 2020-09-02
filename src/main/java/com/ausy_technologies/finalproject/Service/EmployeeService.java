@@ -48,12 +48,12 @@ public class EmployeeService {
         Departments department = null;
         JobCategories jobCategory = null;
         try {
-            department = departmentsRepository.findById(departmentid).get();
+            department = departmentsRepository.findById(departmentid);
         } catch (RuntimeException e) {
             throw new ErrorResponse(e, "No value present for this department id", 404);
         }
         try {
-            jobCategory = jobCategoriesRepository.findById(jobcategoryid).get();
+            jobCategory = jobCategoriesRepository.findById(jobcategoryid);
         } catch (RuntimeException e) {
             throw new ErrorResponse(e, "No value present for this jobcategory id", 404);
 
@@ -83,15 +83,15 @@ public class EmployeeService {
         employeeRepository.delete(employee);
     }
 
-    public Employee updateEmployee(Employee employee, int id) {
-        Employee updatedEmployee = findEmployeeById(id);
+    public Employee updateEmployee(Employee employee, int employeeId, int departmentId, int jobCategoryId) {
+        Employee updatedEmployee = findEmployeeById(employeeId);
 
         updatedEmployee.setFirstName(employee.getFirstName());
         updatedEmployee.setLastName(employee.getLastName());
 
 
-        Departments department = departmentsRepository.findById(employee.getDepartment().getId()).get();
-        JobCategories jobCategory = jobCategoriesRepository.findById(employee.getJobCategories().getId()).get();
+        Departments department = departmentsRepository.findById(departmentId);
+        JobCategories jobCategory = jobCategoriesRepository.findById(jobCategoryId);
         if (department == null || jobCategory == null) {
             throw new ErrorResponse("Department or Jobcategory is null", 404);
         }
@@ -113,8 +113,7 @@ public class EmployeeService {
         updatedEmployee.setStudies(employee.getStudies());
         updatedEmployee.setTelephone(employee.getTelephone());
 
-        employeeRepository.save(updatedEmployee);
-        return updatedEmployee;
+        return employeeRepository.save(updatedEmployee);
     }
 
     public List<Employee> findEmployeeByDepartment(int departmentId) {

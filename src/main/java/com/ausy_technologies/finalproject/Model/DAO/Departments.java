@@ -16,9 +16,6 @@ public class Departments {
     @Column(name = "department_name")
     private String name;
 
-    @OneToMany(mappedBy = "department" , cascade = CascadeType.REMOVE)
-    private List<Employee> employees ;
-
     public int getId() {
         return id;
     }
@@ -33,14 +30,6 @@ public class Departments {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
     public boolean isValid(){

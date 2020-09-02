@@ -25,7 +25,7 @@ public class DepartmentsService {
     }
 
     public Departments findDeptById(int id) {
-        Departments departments =this.departmentsRepository.findById(id).get();
+        Departments departments =this.departmentsRepository.findById(id);
         if(departments == null) {
             throw new ErrorResponse("Department not found!", 404);
         }
@@ -41,7 +41,7 @@ public class DepartmentsService {
     public void deleteDeptById(int id){
         Departments departments = null;
         try {
-            departments = departmentsRepository.findById(id).get();
+            departments = departmentsRepository.findById(id);
         }catch (RuntimeException e){
             throw new ErrorResponse(e.getMessage(),404);
         }
