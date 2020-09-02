@@ -130,4 +130,16 @@ public class EmployeeService {
         List<Employee> employeeList = findAllEmployees();
         return employeeList.stream().filter(e -> e.getDepartment() != null).filter(e -> e.getDepartment().getId() == depid).filter(e -> e.getJobCategories() != null).filter(e -> e.getJobCategories().getId() == jobid).collect(Collectors.toList());
     }
+
+    public List<Employee> findAllEmployeesOrderByFirstName() {
+        return this.employeeRepository.findAllByOrderByFirstName();
+    }
+
+    public List<Employee> findAllEmployeesOrderByLastName() {
+        return this.employeeRepository.findAllByOrderByLastName();
+    }
+
+    public List<Employee> findAllEmployeesOrderBySalary() {
+        return this.employeeRepository.findAllByOrderBySalary();
+    }
 }

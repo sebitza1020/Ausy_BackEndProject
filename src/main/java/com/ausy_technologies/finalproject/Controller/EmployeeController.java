@@ -198,4 +198,55 @@ public class EmployeeController {
         }
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Employee deleted!");
     }
+
+    @GetMapping("/getEmployeesOrderByFirstName")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeesOrderByFirstName(){
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        List<Employee> employeeList = null;
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Resolve","getEmployeesOrderByFirstName");
+
+        try {
+            employeeList = employeeService.findAllEmployeesOrderByFirstName();
+        }catch (ErrorResponse e){
+            ErrorResponse.LogError(e);
+            return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
+        }
+        employeeList.stream().map(e -> employeeMapper.convertEmployeeToDto(e)).forEach(employeeDTOList::add);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
+    }
+
+    @GetMapping("/getEmployeesOrderByLastName")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeesOrderByLastName(){
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        List<Employee> employeeList = null;
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Resolve","getEmployeesOrderByLastName");
+
+        try {
+            employeeList = employeeService.findAllEmployeesOrderByLastName();
+        }catch (ErrorResponse e){
+            ErrorResponse.LogError(e);
+            return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
+        }
+        employeeList.stream().map(e -> employeeMapper.convertEmployeeToDto(e)).forEach(employeeDTOList::add);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
+    }
+
+    @GetMapping("/getEmployeesOrderBySalary")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeesOrderBySalary(){
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        List<Employee> employeeList = null;
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Resolve","getEmployeesOrderBySalary");
+
+        try {
+            employeeList = employeeService.findAllEmployeesOrderBySalary();
+        }catch (ErrorResponse e){
+            ErrorResponse.LogError(e);
+            return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
+        }
+        employeeList.stream().map(e -> employeeMapper.convertEmployeeToDto(e)).forEach(employeeDTOList::add);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
+    }
 }
