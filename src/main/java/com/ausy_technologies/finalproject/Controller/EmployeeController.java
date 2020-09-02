@@ -135,7 +135,7 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
     }
 
-    @GetMapping("/getEmployeesByDep/{departmentid}")
+    @GetMapping("/getEmployeesByDepartment/{departmentid}")
     public ResponseEntity<List<EmployeeDTO>> getEmployeeByDep(@PathVariable int departmentid){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response","getEmployeesByDep");
@@ -169,7 +169,7 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
     }
 
-    @GetMapping("/getEmployeesDTOByDepAndJob/{departmentid}/{jobid}")
+    @GetMapping("/getEmployeesDTOByDepartmentAndJob/{departmentid}/{jobid}")
     public ResponseEntity<List<EmployeeDTO>> getEmployeeByDepandJob(@PathVariable int departmentid, @PathVariable int jobid){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response","getEmployeesByDepartmentAndJobId");
