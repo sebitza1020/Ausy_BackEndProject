@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ApiError {
     private HttpStatus status;
@@ -12,7 +11,6 @@ public class ApiError {
     private LocalDateTime timestamp;
     private String message;
     private String debugMessage;
-    private List<ApiSubError> subErrors;
 
     private ApiError() {
         timestamp = LocalDateTime.now();
@@ -57,9 +55,7 @@ public class ApiError {
         this.debugMessage = debugMessage;
     }
 
-    public void setSubErrors(List<ApiSubError> subErrors) {
-        this.subErrors = subErrors;
-    }
+
 
     public LocalDateTime getTimestamp() {
         return timestamp;
@@ -73,7 +69,4 @@ public class ApiError {
         return debugMessage;
     }
 
-    public List<ApiSubError> getSubErrors() {
-        return subErrors;
-    }
 }
