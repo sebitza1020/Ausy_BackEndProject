@@ -40,7 +40,7 @@ public class JobCategoriesService {
         try {
             jobCategories = jobCategoriesRepository.findById(id);
         }catch (RuntimeException e){
-            throw new ErrorResponse(e.getMessage(),404);
+            throw new ErrorResponse("Job category not found!",404);
         }
         jobCategoriesRepository.delete(jobCategories);
     }

@@ -22,7 +22,7 @@ public class JobCategoriesController {
     @PostMapping("/addJobCategory")
     public ResponseEntity<JobCategories> saveJob(@RequestBody JobCategories jobCategories) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Responded", "saveJobCategory");
+        httpHeaders.add("Response", "saveJobCategory");
         JobCategories jobAdded = null;
         try {
             jobAdded = this.jobCategoriesService.saveJobCategory(jobCategories);
@@ -36,41 +36,41 @@ public class JobCategoriesController {
     @GetMapping("/getJobCategoryBy/{id}")
     public ResponseEntity<JobCategories> findJobCategoryById(@PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Responded", "getJobCategory");
+        httpHeaders.add("Response", "getJobCategory");
         JobCategories job;
         try {
             job = this.jobCategoriesService.findJobCategoryById(id);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
+            return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(null);
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).body(job);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(job);
     }
 
     @GetMapping("/getAllJobCategories")
     public ResponseEntity<List<JobCategories>> findAllJobCategories() {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Responded", "getAllJobCategories");
+        httpHeaders.add("Response", "getAllJobCategories");
         List<JobCategories> jobCategoriesList;
         try {
             jobCategoriesList = this.jobCategoriesService.findAllJobCategories();
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
+            return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(null);
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).body(jobCategoriesList);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(jobCategoriesList);
     }
 
-    @DeleteMapping("/deleteJobCategory")
-    public ResponseEntity<String> deleteJobCategoriesById(@RequestParam int id) {
+    @DeleteMapping("/deleteJobCategory/{id}")
+    public ResponseEntity<String> deleteJobCategoriesById(@PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Responded", "deleteJobCategory");
+        httpHeaders.add("Response", "deleteJobCategory");
         try {
             this.jobCategoriesService.deleteJobById(id);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body("Job category not found!");
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).body("Job category deleted!");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Job category deleted!");
     }
 }

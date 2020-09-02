@@ -27,49 +27,47 @@ public class DepartmentsController {
             deptAdded = this.departmentsService.saveDepartment(departments);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).headers(httpHeaders).body(null);
         }
         return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).body(deptAdded);
     }
 
-    @GetMapping("/findDepartmentBy/{id}")
+    @GetMapping("/getDepartmentById/{id}")
     public ResponseEntity<Departments> findDepartmentById(@PathVariable int id) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Response", "findDepartment");
         Departments department = null;
         try {
             department = this.departmentsService.findDeptById(id);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).body(department);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Response", "findDepartment");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(department);
     }
 
-    @GetMapping("/findAllDepartments")
+    @GetMapping("/getAllDepartments")
     public ResponseEntity<List<Departments>> findAllDepartments() {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Response", "findAllDepartments");
-        List<Departments> departmentsList;
+        List<Departments> departmentsList = null;
         try {
             departmentsList = this.departmentsService.findAllDepartments();
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
         }
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Response", "findAllDepartments");
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(departmentsList);
     }
 
-    @DeleteMapping("/deleteDepartment")
-    public ResponseEntity<String> deleteDepartmentById(@RequestParam int id) {
+    @DeleteMapping("/deleteDepartment/{id}")
+    public ResponseEntity<String> deleteDepartmentById(@PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Responded", "deleteDepartment");
+        httpHeaders.add("Response", "deleteDepartment");
         try {
             this.departmentsService.deleteDeptById(id);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body("No value present");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body("Department not found!");
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).body("Department deleted!");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Department deleted!");
     }
 }

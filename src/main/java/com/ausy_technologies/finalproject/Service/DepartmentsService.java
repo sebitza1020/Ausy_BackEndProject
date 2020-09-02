@@ -43,7 +43,7 @@ public class DepartmentsService {
         try {
             departments = departmentsRepository.findById(id);
         }catch (RuntimeException e){
-            throw new ErrorResponse(e.getMessage(),404);
+            throw new ErrorResponse("Department not found!",404);
         }
         departmentsRepository.delete(departments);
 

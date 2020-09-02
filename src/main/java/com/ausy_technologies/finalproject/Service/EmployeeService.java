@@ -78,7 +78,7 @@ public class EmployeeService {
         try {
             employee = employeeRepository.findById(id);
         } catch (RuntimeException e) {
-            throw new ErrorResponse(e.getMessage(), 404);
+            throw new ErrorResponse("Employee not found!", 404);
         }
         employeeRepository.delete(employee);
     }
