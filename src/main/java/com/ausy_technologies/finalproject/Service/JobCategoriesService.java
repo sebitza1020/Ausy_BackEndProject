@@ -38,7 +38,7 @@ public class JobCategoriesService {
     public void deleteJobById(int id){
         JobCategories jobCategories = null;
         try {
-            jobCategories = jobCategoriesRepository.findById(id).get();
+            jobCategories = jobCategoriesRepository.findById(id);
         }catch (RuntimeException e){
             throw new ErrorResponse(e.getMessage(),404);
         }
@@ -46,7 +46,7 @@ public class JobCategoriesService {
     }
 
     public JobCategories findJobCategoryById(int id) {
-        JobCategories jobCategories = jobCategoriesRepository.findById(id).get();
+        JobCategories jobCategories = jobCategoriesRepository.findById(id);
         if(jobCategories == null) {
             throw new ErrorResponse("Job category not found!", 404);
         }

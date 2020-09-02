@@ -73,13 +73,14 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeList);
     }
 
-    @PutMapping("/updateEmployee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable int id) {
+    @PutMapping("/updateEmployee/{employeeId}/{departmentId}/{jobCategoryId}")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable int employeeId,
+                                                   @PathVariable int departmentId, @PathVariable int jobCategoryId) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "updateEmployees");
         Employee employeeUpdated;
         try {
-            employeeUpdated = this.employeeService.updateEmployee(employee, id);
+            employeeUpdated = this.employeeService.updateEmployee(employee, employeeId, departmentId, jobCategoryId);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body(null);
