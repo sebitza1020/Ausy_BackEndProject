@@ -59,7 +59,7 @@ public class EmployeeController {
 
     }
 
-    @GetMapping("/getAllEmployee")
+    @GetMapping("/getAllEmployees")
     public ResponseEntity<List<Employee>> getAllEmployee(){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "getAllEmployees");
@@ -83,7 +83,7 @@ public class EmployeeController {
             employeeUpdated = this.employeeService.updateEmployee(employee, employeeId, departmentId, jobCategoryId);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
         }
         return ResponseEntity.status(HttpStatus.RESET_CONTENT).headers(httpHeaders).body(employeeUpdated);
     }
@@ -99,11 +99,11 @@ public class EmployeeController {
             ErrorResponse.LogError(e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body(null);
         }
-        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employee);
+        return ResponseEntity.status(HttpStatus.FOUND).headers(httpHeaders).body(employee);
     }
 
-    @GetMapping("/getEmployeeDTO")
-    public ResponseEntity<EmployeeDTO> getEmployeeDTO(@RequestParam int id){
+    @GetMapping("/getEmployeeDTO/{id}")
+    public ResponseEntity<EmployeeDTO> getEmployeeDTO(@PathVariable int id){
         EmployeeDTO employeeDTO = null;
         Employee employee = null;
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -135,8 +135,8 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
     }
 
-    @GetMapping("/getEmployeesByDep")
-    public ResponseEntity<List<EmployeeDTO>> getEmployeeByDep(@RequestParam int departmentid){
+    @GetMapping("/getEmployeesByDep/{departmentid}")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeeByDep(@PathVariable int departmentid){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response","getEmployeesByDep");
         List<Employee> employeeList;
@@ -152,8 +152,8 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
     }
 
-    @GetMapping("/getEmployeesByJob")
-    public ResponseEntity<List<EmployeeDTO>> getEmployeeByJob(@RequestParam int jobid){
+    @GetMapping("/getEmployeesByJob/{jobid}")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeeByJob(@PathVariable int jobid){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response","getEmployeesByJob");
         List<Employee> employeeList;
@@ -170,7 +170,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/getEmployeesDTOByDepAndJob/{departmentid}/{jobid}")
-    public ResponseEntity<List<EmployeeDTO>> getEmployeeByDepandJob(@PathVariable int departmentid,@PathVariable int jobid){
+    public ResponseEntity<List<EmployeeDTO>> getEmployeeByDepandJob(@PathVariable int departmentid, @PathVariable int jobid){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response","getEmployeesByDepartmentAndJobId");
         List<Employee> employeeList;
@@ -186,16 +186,16 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeDTOList);
     }
 
-    @DeleteMapping("/deleteEmployee")
-    public ResponseEntity<String> deleteEmployee(@RequestParam int id) {
+    @DeleteMapping("/deleteEmployee/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "deleteEmployee");
         try {
             this.employeeService.deleteEmployeeById(id);
         } catch (ErrorResponse e) {
             ErrorResponse.LogError(e);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body("Employee not found!");
         }
-        return ResponseEntity.status(HttpStatus.GONE).headers(httpHeaders).body("Employee deleted!");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Employee deleted!");
     }
 }
