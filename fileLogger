@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-09-02T18:30:51.887131300Z</date>
+  <millis>1599071451887</millis>
+  <nanos>131300</nanos>
+  <sequence>4</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>30</thread>
+  <message>Department added is null !</message>
+</record>
+<record>
+  <date>2020-09-02T18:51:58.747925400Z</date>
+  <millis>1599072718747</millis>
+  <nanos>925400</nanos>
+  <sequence>7</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>30</thread>
+  <message>Job category is null</message>
+</record>
+<record>
+  <date>2020-09-02T18:57:57.807765300Z</date>
+  <millis>1599073077807</millis>
+  <nanos>765300</nanos>
+  <sequence>9</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>34</thread>
+  <message>Employee list not found!</message>
+</record>
+<record>
+  <date>2020-09-02T19:07:13.992099100Z</date>
+  <millis>1599073633992</millis>
+  <nanos>99100</nanos>
+  <sequence>10</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>33</thread>
+  <message>Null department.</message>
+</record>
+<record>
+  <date>2020-09-02T19:07:13.992099100Z</date>
+  <millis>1599073633992</millis>
+  <nanos>99100</nanos>
+  <sequence>11</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>33</thread>
+  <message>Null department.</message>
+</record>
+<record>
+  <date>2020-09-02T19:07:13.993095Z</date>
+  <millis>1599073633993</millis>
+  <nanos>95000</nanos>
+  <sequence>12</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>33</thread>
+  <message>Null jobcategory.</message>
+</record>
+<record>
+  <date>2020-09-02T19:09:45.565286500Z</date>
+  <millis>1599073785565</millis>
+  <nanos>286500</nanos>
+  <sequence>13</sequence>
+  <logger>global</logger>
+  <level>SEVERE</level>
+  <class>com.ausy_technologies.finalproject.Error.ErrorResponse</class>
+  <method>LogError</method>
+  <thread>30</thread>
+  <message>Null department.</message>
+</record>
+</log>
