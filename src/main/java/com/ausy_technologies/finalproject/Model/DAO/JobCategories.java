@@ -1,5 +1,7 @@
 package com.ausy_technologies.finalproject.Model.DAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +15,10 @@ public class JobCategories {
 
     @Column(name = "jobcategory_name")
     private String name;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobCategory", cascade = CascadeType.REMOVE ,fetch = FetchType.EAGER)
+    private List<Employee> employees;
 
 
     public int getId() {
@@ -29,6 +35,14 @@ public class JobCategories {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
