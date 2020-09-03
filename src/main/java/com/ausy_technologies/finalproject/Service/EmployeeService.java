@@ -96,8 +96,8 @@ public class EmployeeService {
             throw new ErrorResponse("Department or Jobcategory is null", 404);
         }
 
-        updatedEmployee.setDepartment(employee.getDepartment());
-        updatedEmployee.setJobCategoryId(employee.getJobCategories());
+        updatedEmployee.setDepartment(department);
+        updatedEmployee.setJobCategoryId(jobCategory);
         updatedEmployee.setActive(employee.isActive());
         updatedEmployee.setAddress(employee.getAddress());
         updatedEmployee.setBirthday(employee.getBirthday());
