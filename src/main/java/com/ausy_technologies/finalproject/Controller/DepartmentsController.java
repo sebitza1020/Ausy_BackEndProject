@@ -2,6 +2,7 @@ package com.ausy_technologies.finalproject.Controller;
 
 import com.ausy_technologies.finalproject.Error.ErrorResponse;
 import com.ausy_technologies.finalproject.Model.DAO.Departments;
+import com.ausy_technologies.finalproject.Model.DAO.Employee;
 import com.ausy_technologies.finalproject.Service.DepartmentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -69,5 +70,19 @@ public class DepartmentsController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).headers(httpHeaders).body("Department not found!");
         }
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Department deleted!");
+    }
+
+    @PutMapping("/updateDepartment/{id}")
+    public ResponseEntity<Departments> updateDepartment(@RequestBody Departments departments, @PathVariable int id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Response", "updateDepartment");
+        Departments departmentUpdated;
+        try {
+            departmentUpdated = this.departmentsService.updateDepartment(departments, id);
+        } catch (ErrorResponse e) {
+            ErrorResponse.LogError(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.RESET_CONTENT).headers(httpHeaders).body(departmentUpdated);
     }
 }

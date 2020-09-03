@@ -73,4 +73,18 @@ public class JobCategoriesController {
         }
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Job category deleted!");
     }
+
+    @PutMapping("/updateJobCategory/{id}")
+    public ResponseEntity<JobCategories> updateJobCategory(@RequestBody JobCategories jobCategories, @PathVariable int id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Response", "updateJobCategory");
+        JobCategories jobCategoryUpdated;
+        try {
+            jobCategoryUpdated = this.jobCategoriesService.updateJobCategory(jobCategories, id);
+        } catch (ErrorResponse e) {
+            ErrorResponse.LogError(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(httpHeaders).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.RESET_CONTENT).headers(httpHeaders).body(jobCategoryUpdated);
+    }
 }

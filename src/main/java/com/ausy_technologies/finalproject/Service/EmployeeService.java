@@ -113,7 +113,8 @@ public class EmployeeService {
         updatedEmployee.setStudies(employee.getStudies());
         updatedEmployee.setTelephone(employee.getTelephone());
 
-        return employeeRepository.save(updatedEmployee);
+        employeeRepository.save(updatedEmployee);
+        return updatedEmployee;
     }
 
     public List<Employee> findEmployeeByDepartment(int departmentId) {

@@ -2,6 +2,8 @@ package com.ausy_technologies.finalproject.Service;
 
 import com.ausy_technologies.finalproject.Error.ErrorResponse;
 import com.ausy_technologies.finalproject.Model.DAO.Departments;
+import com.ausy_technologies.finalproject.Model.DAO.Employee;
+import com.ausy_technologies.finalproject.Model.DAO.JobCategories;
 import com.ausy_technologies.finalproject.Repository.DepartmentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +49,18 @@ public class DepartmentsService {
         }
         departmentsRepository.delete(departments);
 
+    }
+
+    public Departments updateDepartment(Departments departments, int id) {
+        Departments updatedDepartment = findDeptById(id);
+        if (updatedDepartment.isValid()) {
+            updatedDepartment.setName(departments.getName());
+        }
+        else {
+            throw new ErrorResponse("Department not found!", 404);
+        }
+
+        departmentsRepository.save(updatedDepartment);
+        return updatedDepartment;
     }
 }
