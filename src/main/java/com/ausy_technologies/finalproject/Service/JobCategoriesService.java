@@ -1,6 +1,7 @@
 package com.ausy_technologies.finalproject.Service;
 
 import com.ausy_technologies.finalproject.Error.ErrorResponse;
+import com.ausy_technologies.finalproject.Model.DAO.Departments;
 import com.ausy_technologies.finalproject.Model.DAO.JobCategories;
 import com.ausy_technologies.finalproject.Repository.JobCategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,18 @@ public class JobCategoriesService {
         else {
             return jobCategories;
         }
+    }
+
+    public JobCategories updateJobCategory(JobCategories jobCategories, int id) {
+        JobCategories updatedJobCategory = findJobCategoryById(id);
+        if (updatedJobCategory.isValid()) {
+            updatedJobCategory.setName(jobCategories.getName());
+        }
+        else {
+            throw new ErrorResponse("Job category not found!", 404);
+        }
+
+        jobCategoriesRepository.save(updatedJobCategory);
+        return updatedJobCategory;
     }
 }
