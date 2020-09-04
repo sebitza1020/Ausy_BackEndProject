@@ -1,49 +1,71 @@
 package com.ausy_technologies.finalproject.Model.DAO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+@ApiModel(description = "This model is to create a employee.")
 @Entity
 @Table(name = "employees")
 public class Employee {
 
+    @ApiModelProperty(notes = "Auto generated unique id", required = true)
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    @ApiModelProperty(notes = "Employee's first name", required = true)
     private String firstName;
+    @ApiModelProperty(notes = "Employee's last name", required = true)
     private String lastName;
 
+    @ApiModelProperty(notes = "Job category id which is a foreign key", required = true)
     @ManyToOne
     @JoinColumn(name = "jobCategoryId")
     private JobCategories jobCategory;
 
+    @ApiModelProperty(notes = "Department id which is a foreign key", required = true)
     @ManyToOne
     @JoinColumn(name = "departmentId")
     private Departments department;
 
 
+    @ApiModelProperty(notes = "A boolean which says if an employee is manager or not")
     private boolean isManager;
+    @ApiModelProperty(notes = "The date when the employee started his duties", required = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate startDate;
+    @ApiModelProperty(notes = "The date when the employee ended his duties")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate endDate;
+    @ApiModelProperty(notes = "A boolean which says if an employee is active or not")
     private boolean active;
+    @ApiModelProperty(notes = "Employee's address", required = true)
     private String address;
+    @ApiModelProperty(notes = "Employee's postal code", required = true)
     private String CP;
+    @ApiModelProperty(notes = "Employee's telephone number", required = true)
     private String telephone;
+    @ApiModelProperty(notes = "Employee's email address", required = true)
     private String email;
+    @ApiModelProperty(notes = "Employee's birthday date", required = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate birthday;
+    @ApiModelProperty(notes = "Number of children the employee has")
     private int noChildren;
+    @ApiModelProperty(notes = "Employee's salary", required = true)
     private Double salary;
+    @ApiModelProperty(notes = "Employee's studies", required = true)
     private String studies;
+    @ApiModelProperty(notes = "Employee's social security number (SSN)")
     private String socialSecurityNumber;
+    @ApiModelProperty(notes = "A boolean which says if an employee has a driving license or not")
     private boolean hasDrivingLicense;
 
     public int getId() {
