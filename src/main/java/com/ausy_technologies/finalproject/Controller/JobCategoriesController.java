@@ -4,6 +4,9 @@ import com.ausy_technologies.finalproject.Error.ErrorResponse;
 import com.ausy_technologies.finalproject.Model.DAO.Departments;
 import com.ausy_technologies.finalproject.Model.DAO.JobCategories;
 import com.ausy_technologies.finalproject.Service.JobCategoriesService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "Job Categories Management RESTful Services (Job Categories Controller)", value = "JobCategoriesController",
+        description = "Controller for Job Categories Management Service")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/jobcategories")
@@ -20,8 +25,10 @@ public class JobCategoriesController {
     @Autowired
     private JobCategoriesService jobCategoriesService;
 
+    @ApiOperation(value = "Creates a new job category")
     @PostMapping("/addJobCategory")
-    public ResponseEntity<JobCategories> saveJob(@RequestBody JobCategories jobCategories) {
+    public ResponseEntity<JobCategories> saveJob(@ApiParam("Job category information for a new job category to be created")
+                                                     @RequestBody JobCategories jobCategories) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "saveJobCategory");
         JobCategories jobAdded = null;
@@ -34,8 +41,10 @@ public class JobCategoriesController {
         return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(jobAdded);
     }
 
+    @ApiOperation(value = "Retrieves a job category")
     @GetMapping("/getJobCategoryBy/{id}")
-    public ResponseEntity<JobCategories> findJobCategoryById(@PathVariable int id) {
+    public ResponseEntity<JobCategories> findJobCategoryById(@ApiParam("Job catgeory's id necessary to be retrieved")
+                                                                 @PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "getJobCategory");
         JobCategories job;
@@ -48,6 +57,7 @@ public class JobCategoriesController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(job);
     }
 
+    @ApiOperation(value = "Retrieves a list of job categories")
     @GetMapping("/getAllJobCategories")
     public ResponseEntity<List<JobCategories>> findAllJobCategories() {
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -62,8 +72,10 @@ public class JobCategoriesController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(jobCategoriesList);
     }
 
+    @ApiOperation(value = "Deletes a job category")
     @DeleteMapping("/deleteJobCategory/{id}")
-    public ResponseEntity<String> deleteJobCategoriesById(@PathVariable int id) {
+    public ResponseEntity<String> deleteJobCategoriesById(@ApiParam("Department's id necessary to be deleted")
+                                                              @PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "deleteJobCategory");
         try {
@@ -75,8 +87,12 @@ public class JobCategoriesController {
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body("Job category deleted!");
     }
 
+    @ApiOperation(value = "Updates the job category's name")
     @PutMapping("/updateJobCategory/{id}")
-    public ResponseEntity<JobCategories> updateJobCategory(@RequestBody JobCategories jobCategories, @PathVariable int id) {
+    public ResponseEntity<JobCategories> updateJobCategory(@ApiParam("Job category's new information necessary to be updated")
+                                                               @RequestBody JobCategories jobCategories,
+                                                           @ApiParam("Job category's id necessary to be updated")
+                                                           @PathVariable int id) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Response", "updateJobCategory");
         JobCategories jobCategoryUpdated;

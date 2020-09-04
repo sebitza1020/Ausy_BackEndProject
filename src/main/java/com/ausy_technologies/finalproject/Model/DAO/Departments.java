@@ -1,18 +1,23 @@
 package com.ausy_technologies.finalproject.Model.DAO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.List;
 
+@ApiModel(description = "This model is to create a department.")
 @Entity
 @Table(name = "departments")
 public class Departments {
+    @ApiModelProperty(notes = "Auto generated unique id", required = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    @ApiModelProperty(notes = "Department's name", required = true)
     @Column(name = "department_name")
     private String name;
 
